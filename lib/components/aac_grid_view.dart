@@ -20,7 +20,7 @@ class _AacGridViewState extends State<AacGridView> {
     return Container(
       child: GridView.count(
         crossAxisCount: 2,
-        childAspectRatio: 8 / 8,
+        childAspectRatio: 8 / 9,
         children: List.generate(myList.length, (index) {
           return GestureDetector(
             onTap: () => widget.speak(myList[index].displayName),
@@ -30,7 +30,7 @@ class _AacGridViewState extends State<AacGridView> {
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(32.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: SvgPicture.asset(myList[index].symbolPath,
                         //color: Colors.red,
                         height: 80,
@@ -40,7 +40,7 @@ class _AacGridViewState extends State<AacGridView> {
                     myList[index].displayName,
                     style: GoogleFonts.lato(
                       textStyle: Theme.of(context).textTheme.body1,
-                      fontSize: 25,
+                      fontSize: 21,
                     ),
                   ),
                 ],

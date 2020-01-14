@@ -40,6 +40,7 @@ class AacButton {
 
   AacButton(
       this.categoryIndex, this.symbolName, this.displayName, this.speechText) {
+    this.displayName = this.displayName.replaceAll('_', ' ');
     this.symbolPath = 'assets/symbols/$symbolName.svg'; //get symbol path
   }
 
