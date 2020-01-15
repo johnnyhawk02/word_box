@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
 
 class AacGridView extends StatefulWidget {
   AacGridView({this.aac, this.speak, this.categoryIndex});
@@ -20,8 +22,8 @@ class _AacGridViewState extends State<AacGridView> {
     return Container(
       color: Colors.blue,
       child: GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: 8 / 9,
+        crossAxisCount: 3,
+        childAspectRatio: 8 / 10,
         children: List.generate(myList.length, (index) {
           return Padding(
             padding: const EdgeInsets.all(2.0),
@@ -38,7 +40,7 @@ class _AacGridViewState extends State<AacGridView> {
                   ),
                   Center(
                     child: Padding(
-                      padding: const EdgeInsets.all(40.0),
+                      padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
                       child: SvgPicture.asset(myList[index].symbolPath,
 
                           //color: Colors.red,
@@ -51,12 +53,15 @@ class _AacGridViewState extends State<AacGridView> {
                     bottom: 12,
                     child: Align(
                       alignment: Alignment.bottomCenter,
-                      child: Text(
+                      child: AutoSizeText(
+
                         myList[index].displayName,
                         style: GoogleFonts.didactGothic(
                           textStyle: Theme.of(context).textTheme.body1,
-                          fontSize: 21,
+                          fontSize: 30,
+
                         ),
+                        maxLines: 1,
                       ),
                     ),
                   ),
