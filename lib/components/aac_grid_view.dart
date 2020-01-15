@@ -22,31 +22,42 @@ class _AacGridViewState extends State<AacGridView> {
         crossAxisCount: 2,
         childAspectRatio: 8 / 9,
         children: List.generate(myList.length, (index) {
-          return GestureDetector(
-            onTap: () => widget.speak(myList[index].displayName),
-            child: Card(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: SvgPicture.asset(myList[index].symbolPath,
-                        //color: Colors.red,
-                        height: 80,
-                        semanticsLabel: 'A red up arrow'),
-                  ),
-                  Text(
+          return Stack(
+//            onTap: () => widget.speak(myList[index].displayName),
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: SvgPicture.asset(myList[index].symbolPath,
+
+                      //color: Colors.red,
+
+                      //height: MediaQuery.of(context).size.height / 5,
+                      semanticsLabel: 'A red up arrow'),
+                ),
+              ),
+              Positioned.fill(
+                bottom: 12,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
                     myList[index].displayName,
                     style: GoogleFonts.lato(
                       textStyle: Theme.of(context).textTheme.body1,
                       fontSize: 21,
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ); //robohash.org api provide you different images for any number you are giving
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () => widget.speak(myList[index].displayName),
+
+                ),
+              )
+            ],
+          );
         }),
       ),
     );

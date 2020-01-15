@@ -1,28 +1,9 @@
-//import 'symbol_paths.dart';
+import 'symbol_paths.dart';
+import 'default_category_data.dart' show defaultCategoryData;
+import 'default_button_data.dart' show defaultButtonData;
 
 List<Category> _categories = [];
 List<AacButton> _buttons = [];
-
-List defaultButtonData = [
-  {'categoryIndex': 0, 'symbolName': 'house'},
-  {'categoryIndex': 0, 'symbolName': 'butter'},
-  {'categoryIndex': 0, 'symbolName': 'flatscreen_tv'},
-  {'categoryIndex': 1, 'symbolName': 'chips'},
-  {'categoryIndex': 1, 'symbolName': 'bread'},
-  {'categoryIndex': 1, 'symbolName': 'soup'},
-  {'categoryIndex': 1, 'symbolName': 'orange_juice'},
-  {'categoryIndex': 1, 'symbolName': 'milk'},
-  {'categoryIndex': 1, 'symbolName': 'lemonade'},
-  {'categoryIndex': 2, 'symbolName': 'acorn'},
-  {'categoryIndex': 2, 'symbolName': 'budgie'},
-  {'categoryIndex': 2, 'symbolName': 'cat'},
-];
-
-List defaultCategoryData = [
-  {'index': 0, 'name': 'General'},
-  {'index': 1, 'name': 'Food'},
-  {'index': 2, 'name': 'Animals'},
-];
 
 class Category {
   int index;
@@ -57,7 +38,7 @@ class Aac {
       _buttons.add(AacButton(
         element['categoryIndex'],
         element['symbolName'],
-        element['symbolName'],
+        tidyUp(element['symbolName']),
         element['symbolName'],
       ));
     });
@@ -80,5 +61,14 @@ class Aac {
 
   void addButton({categoryIndex, symbolName, displayName, speechText}) {
     _buttons.add(AacButton(categoryIndex, symbolName, displayName, speechText));
+  }
+
+  String tidyUp(String s) {
+    String tmp = '';
+    if (s.contains(',')) {
+      tmp = s.split(',')[1] + ' ' + s.split(',')[0];
+      s=tmp.trimLeft();//.ltr
+    }
+    return s;
   }
 }
