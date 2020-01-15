@@ -18,45 +18,58 @@ class _AacGridViewState extends State<AacGridView> {
     List myList = widget.aac.buttonsInCategory(widget.categoryIndex);
 
     return Container(
+      color: Colors.blue,
       child: GridView.count(
         crossAxisCount: 2,
         childAspectRatio: 8 / 9,
         children: List.generate(myList.length, (index) {
-          return Stack(
+          return Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+
+              //padding: const EdgeInsets.all(8.0),
+              child: Stack(
 //            onTap: () => widget.speak(myList[index].displayName),
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(40.0),
-                  child: SvgPicture.asset(myList[index].symbolPath,
+                children: [
+                  Container(
 
-                      //color: Colors.red,
+                    color: Colors.white,
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(40.0),
+                      child: SvgPicture.asset(myList[index].symbolPath,
 
-                      //height: MediaQuery.of(context).size.height / 5,
-                      semanticsLabel: 'A red up arrow'),
-                ),
-              ),
-              Positioned.fill(
-                bottom: 12,
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Text(
-                    myList[index].displayName,
-                    style: GoogleFonts.lato(
-                      textStyle: Theme.of(context).textTheme.body1,
-                      fontSize: 21,
+                          //color: Colors.red,
+
+                          //height: MediaQuery.of(context).size.height / 5,
+                          semanticsLabel: 'A red up arrow'),
                     ),
                   ),
-                ),
-              ),
-              Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () => widget.speak(myList[index].displayName),
+                  Positioned.fill(
+                    bottom: 12,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        myList[index].displayName,
+                        style: GoogleFonts.didactGothic(
+                          textStyle: Theme.of(context).textTheme.body1,
+                          fontSize: 21,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () => widget.speak(myList[index].displayName),
 
-                ),
-              )
-            ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           );
         }),
       ),
