@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-
 class AacGridView extends StatefulWidget {
   AacGridView({this.aac, this.speak, this.categoryIndex});
   final aac;
@@ -20,9 +19,10 @@ class _AacGridViewState extends State<AacGridView> {
     List myList = widget.aac.buttonsInCategory(widget.categoryIndex);
 
     return Container(
-      color: Colors.blue,
+      height: MediaQuery.of(context).size.height - 100,
+      //color: Colors.blue,
       child: GridView.count(
-        crossAxisCount: 3,
+        crossAxisCount: 2,
         childAspectRatio: 8 / 10,
         children: List.generate(myList.length, (index) {
           return Padding(
@@ -35,12 +35,11 @@ class _AacGridViewState extends State<AacGridView> {
 //            onTap: () => widget.speak(myList[index].displayName),
                 children: [
                   Container(
-
                     color: Colors.white,
                   ),
                   Center(
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
+                      padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
                       child: SvgPicture.asset(myList[index].symbolPath,
 
                           //color: Colors.red,
@@ -50,18 +49,19 @@ class _AacGridViewState extends State<AacGridView> {
                     ),
                   ),
                   Positioned.fill(
-                    bottom: 12,
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: AutoSizeText(
-
-                        myList[index].displayName,
-                        style: GoogleFonts.didactGothic(
-                          textStyle: Theme.of(context).textTheme.body1,
-                          fontSize: 30,
-
+                    bottom: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: AutoSizeText(
+                          myList[index].displayName,
+                          style: GoogleFonts.didactGothic(
+                            textStyle: Theme.of(context).textTheme.body1,
+                            fontSize: 16,
+                          ),
+                          maxLines: 1,
                         ),
-                        maxLines: 1,
                       ),
                     ),
                   ),
@@ -69,7 +69,6 @@ class _AacGridViewState extends State<AacGridView> {
                     color: Colors.transparent,
                     child: InkWell(
                       onTap: () => widget.speak(myList[index].displayName),
-
                     ),
                   )
                 ],

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'components/aac_grid_view.dart';
 
 import 'aac_button.dart';
+import 'components/category_view.dart';
 
 void main() {
   runApp(MyApp());
@@ -54,24 +56,28 @@ class _MyHomePageState extends State<MyHomePage> {
     Aac aac = Aac();
     SystemChrome.setEnabledSystemUIOverlays([]);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(aac.categories[_categoryIndex].name),
-      ),
-      body:AacGridView(aac: aac, categoryIndex: _categoryIndex, speak: _speak),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            if (_categoryIndex < aac.categories.length-1) {
-              _categoryIndex++;
-            }else{
-              _categoryIndex=0;
-            }
-          });
-        },
-        tooltip: 'next page',
-        child: Icon(Icons.navigate_next),
+    return Material(
+      child: Container(
+        color: Colors.green,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              AacGridView(
+                  aac: aac, categoryIndex: _categoryIndex, speak: _speak),
+              CategoryView(
+                  aac: aac,
+                  setCategory: setCategory,
+                  categoryIndex: _categoryIndex),
+            ],
+          ),
+        ),
       ),
     );
+  }
+
+  setCategory(index) {
+    setState(() {
+      _categoryIndex = index;
+    });
   }
 }
